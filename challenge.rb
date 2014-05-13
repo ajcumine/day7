@@ -18,10 +18,13 @@ loop do
     File.open("hello_from_ruby.txt", "w") {|f| f.puts "#{@text}"}
     puts "Text saved to file"
   when "load"
-    File.open("hello_from_ruby.txt", "r") {|f| @text = f.read}
+    File.open("hello_from_ruby.txt", "r") {|f| puts f.read}
     puts "Text loaded from file"
   when "introspect"
-    File.open("hello_from_ruby.txt", "r") {|f| puts f.read}
+    line_num = 0
+    File.open(File.basename(__FILE__), "r").each do |line|
+      puts "#{line_num += 1} #{line}"
+    end
   when "exit"
     exit
   else
